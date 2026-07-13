@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Philip Myers | Professional Portfolio</title>
+  <meta name="description" content="Professional single-page website for a thoughtful, high-quality operations leader." />
+  <style>
+    :root {
+      --teal-900: #0f766e;
+      --teal-700: #0f9488;
+      --teal-500: #14b8a6;
+      --teal-100: #ccfbf1;
+      --ink-900: #0f172a;
+      --ink-700: #334155;
+      --ink-500: #64748b;
+      --surface: #E8E8E8;
+      --surface-strong: #f0f0f0;
+      --surface-soft: #ececec;
+      --border: #d0d0d0;
+      --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+      --header-bg: rgba(232, 232, 232, 0.95);
+      --hero-bg: linear-gradient(180deg, #f0f0f0 0%, #E8E8E8 100%);
+    }
+
+    :root[data-theme="dark"] {
+      --teal-900: #5eead4;
+      --teal-700: #2dd4bf;
+      --teal-500: #5eead4;
+      --teal-100: #134e4a;
+      --ink-900: #f8fafc;
+      --ink-700: #e2e8f0;
+      --ink-500: #cbd5e1;
+      --surface: #111827;
+      --surface-strong: #172033;
+      --surface-soft: #202d44;
+      --border: #334155;
+      --shadow: 0 10px 30px rgba(2, 6, 23, 0.5);
+      --header-bg: rgba(17, 24, 39, 0.95);
+      --hero-bg: linear-gradient(180deg, #172033 0%, #111827 100%);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--ink-900);
+      background: var(--surface);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(120deg, rgba(255,255,255,0.18), rgba(0,0,0,0.03));
+      mix-blend-mode: soft-light;
+      opacity: 0.8;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: 0;
+      background: var(--teal-900);
+      color: white;
+      padding: 0.75rem 1rem;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    .container {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      gap: 0.75rem;
+    }
+
+    .brand {
+      font-weight: 700;
+      color: var(--teal-900);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 0.85rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-700);
+      font-weight: 600;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.2rem;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+      border-radius: 999px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .theme-option {
+      border: 0;
+      background: transparent;
+      color: var(--ink-700);
+      border-radius: 999px;
+      padding: 0.4rem 0.55rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+    }
+
+    .theme-option:hover,
+    .theme-option:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .theme-option.active {
+      background: var(--surface);
+      color: var(--ink-900);
+    }
+
+    .theme-option.light.active {
+      background: #111827;
+      color: #f8fafc;
+    }
+
+    .theme-option.dark.active {
+      background: #E8E8E8;
+      color: #0f172a;
+    }
+
+    .theme-icon {
+      width: 0.95rem;
+      height: 0.95rem;
+      display: block;
+      flex-shrink: 0;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .hero {
+      padding: 4rem 0 3rem;
+      background: var(--hero-bg);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      margin: 0 0 1rem;
+      color: var(--teal-900);
+    }
+
+    .hero .lead {
+      font-size: 1.1rem;
+      color: var(--ink-700);
+      max-width: 700px;
+      margin: 0 0 1.5rem;
+    }
+
+    .pill-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin: 1.25rem 0 1.5rem;
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.6rem 0.95rem;
+      border-radius: 999px;
+      background: var(--teal-100);
+      color: var(--teal-900);
+      font-weight: 700;
+      border: 1px solid #b8f1e9;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.2rem;
+      border-radius: 999px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .btn:hover, .btn:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary {
+      background: var(--teal-700);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--teal-900);
+      border: 1px solid var(--border);
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.25rem;
+      padding: 0.6rem 0.95rem;
+      border-radius: 999px;
+      background: var(--teal-100);
+      color: var(--teal-900);
+      font-weight: 700;
+      border: 1px solid #b8f1e9;
+      text-decoration: none;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow);
+      outline: none;
+    }
+
+    .micro {
+      font-size: 0.95rem;
+      color: var(--ink-500);
+      margin-top: 0.5rem;
+    }
+
+    section {
+      padding: 3rem 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 2.3vw, 1.8rem);
+      margin: 0 0 1rem;
+      color: var(--teal-900);
+    }
+
+    .section-copy {
+      max-width: 760px;
+      color: var(--ink-700);
+      margin-bottom: 1.25rem;
+    }
+
+    .bullets {
+      padding-left: 1.2rem;
+      color: var(--ink-700);
+    }
+
+    .bullets li {
+      margin-bottom: 0.65rem;
+    }
+
+    .cards {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+
+    .card {
+      padding: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0 0 0.5rem;
+      color: var(--teal-900);
+      font-size: 1.05rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--ink-700);
+    }
+
+    .contact-box {
+      background: var(--surface-strong);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    footer {
+      padding: 1.5rem 0 2.5rem;
+      color: var(--ink-500);
+      font-size: 0.95rem;
+    }
+
+    @media (min-width: 700px) {
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .hero {
+        padding-top: 5rem;
+      }
+    }
+
+    @media (min-width: 960px) {
+      .hero {
+        padding: 6rem 0 4rem;
+      }
+      .cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#top">Philip Myers</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#highlights">Highlights</a>
+        <a href="#contact">Contact</a>
+        <div class="theme-toggle" role="group" aria-label="Theme toggle">
+          <button class="theme-option light" id="lightThemeBtn" type="button" aria-label="Switch to light mode" aria-pressed="true">
+            <svg class="theme-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M12 2.5V4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M12 19.5V21.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M4.5 12H2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M21.5 12H19.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M5.9 5.9L4.3 4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M19.7 19.7L18.1 18.1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M5.9 18.1L4.3 19.7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M19.7 4.3L18.1 5.9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button class="theme-option dark" id="darkThemeBtn" type="button" aria-label="Switch to dark mode" aria-pressed="false">☾</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container">
+        <h1>Philip Myers</h1>
+        <p class="lead">I help teams turn complex problems into high-quality outcomes.</p>
+
+        <div class="pill-group" aria-label="Core strengths">
+          <span class="pill">Collaboration</span>
+          <span class="pill">Detail-Oriented</span>
+          <span class="pill">Imagination</span>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="#highlights">View Highlights</a>
+          <a class="btn btn-secondary" href="#contact">Contact</a>
+        </div>
+
+        <p class="micro">Idealistic insight, execution you can trust.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="section-title">What I bring</h2>
+        <p class="section-copy">
+          I bring a disciplined, thoughtful approach to high-volume operations. My work is grounded in collaboration, strong standards, and creative problem-solving.
+        </p>
+        <ul class="bullets">
+          <li><strong>Collaboration:</strong> I listen carefully, align people around shared goals, and help teams turn different strengths into effective outcomes.</li>
+          <li><strong>Detail-Oriented:</strong> I focus on the small things that protect quality, consistency, and guest experience.</li>
+          <li><strong>Imagination:</strong> I look for practical new ways to improve systems, solve problems, and raise the bar.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="highlights">
+      <div class="container">
+        <h2 class="section-title">Selected highlights</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>Operational systems</h3>
+            <p>Built and implemented workflow and technological systems that increased operational efficiency by 200% and contributed to a 110–125% lift in per-capita gross.</p>
+          </article>
+
+          <article class="card">
+            <h3>Live event reliability</h3>
+            <p>Managed live technical switching and equipment changeovers under pressure, resolving projector and AV issues in real time to keep events on air.</p>
+          </article>
+
+          <article class="card">
+            <h3>Team leadership</h3>
+            <p>Trained and led teams with consistency and accountability while producing shift schedules and managing payroll and UKG entries with care.</p>
+          </article>
+
+          <article class="card">
+            <h3>Quality execution</h3>
+            <p>Maintained high standards in fast-moving, guest-facing environments by combining calm judgment, clear communication, and close attention to detail.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2 class="section-title">Let’s build something high-quality</h2>
+          <p class="section-copy">
+            I’m interested in opportunities where strong operations, thoughtful collaboration, and dependable execution matter. If you need someone who can keep standards high while improving how a team works, I would be glad to connect.
+          </p>
+          <p>
+            <a class="contact-link" href="https://www.linkedin.com/in/philip-m-25152398" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+          </p>
+          <p class="micro">I respond carefully and with intention.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Philip Myers. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const yearEl = document.getElementById("year");
+    const lightThemeBtn = document.getElementById("lightThemeBtn");
+    const darkThemeBtn = document.getElementById("darkThemeBtn");
+
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    const savedTheme = localStorage.getItem("theme");
+    const initialTheme = savedTheme === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", initialTheme);
+
+    const updateThemeButtons = () => {
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      lightThemeBtn.classList.toggle("active", !isDark);
+      darkThemeBtn.classList.toggle("active", isDark);
+      lightThemeBtn.setAttribute("aria-pressed", String(!isDark));
+      darkThemeBtn.setAttribute("aria-pressed", String(isDark));
+    };
+
+    updateThemeButtons();
+
+    lightThemeBtn.addEventListener("click", () => {
+      document.documentElement.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
+      updateThemeButtons();
+    });
+
+    darkThemeBtn.addEventListener("click", () => {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+      updateThemeButtons();
+    });
+  </script>
+</body>
+</html>
