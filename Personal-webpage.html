@@ -22,6 +22,8 @@
       --radius: 18px;
       --header-bg: rgba(232, 232, 232, 0.95);
       --hero-bg: linear-gradient(180deg, #f0f0f0 0%, #E8E8E8 100%);
+      --panel-bg: rgba(20, 184, 166, 0.07);
+      --panel-border: rgba(15, 118, 110, 0.18);
     }
 
     :root[data-theme="dark"] {
@@ -39,6 +41,8 @@
       --shadow: 0 10px 30px rgba(2, 6, 23, 0.5);
       --header-bg: rgba(17, 24, 39, 0.95);
       --hero-bg: linear-gradient(180deg, #172033 0%, #111827 100%);
+      --panel-bg: rgba(94, 234, 212, 0.06);
+      --panel-border: rgba(94, 234, 212, 0.2);
     }
 
     * { box-sizing: border-box; }
@@ -315,6 +319,19 @@
       grid-template-columns: 1fr;
     }
 
+    .section-panel {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    @media (min-width: 700px) {
+      .section-panel {
+        padding: 2.25rem;
+      }
+    }
+
     .card {
       padding: 1.25rem;
       border: 1px solid var(--border);
@@ -335,11 +352,10 @@
     }
 
     .contact-box {
-      background: var(--surface-strong);
-      border: 1px solid var(--border);
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
       border-radius: var(--radius);
       padding: 1.5rem;
-      box-shadow: var(--shadow);
     }
 
     footer {
@@ -399,55 +415,61 @@
   <main id="main">
     <section class="hero" id="top">
       <div class="container">
-        <h1>Philip Myers</h1>
-        <p class="tagline">A Decade of Operations Leadership &mdash; Now Powering It With AI</p>
-        <p class="lead">I am a management professional with a decade of experience navigating difficult, ever-changing situations &mdash; leading people and using technology to optimize workflows and maximize profits. I am now bringing AI expertise into that work, because great leadership never stops evolving.</p>
+        <div class="section-panel">
+          <h1>Philip Myers</h1>
+          <p class="tagline">A Decade of Operations Leadership &mdash; Now Powering It With AI</p>
+          <p class="lead">I am a management professional with a decade of experience navigating difficult, ever-changing situations &mdash; leading people and using technology to optimize workflows and maximize profits. I am now bringing AI expertise into that work, because great leadership never stops evolving.</p>
 
-        <div class="pill-group" aria-label="Core strengths">
-          <span class="pill">Collaboration</span>
-          <span class="pill">Detail-Oriented</span>
-          <span class="pill">Imagination</span>
+          <div class="pill-group" aria-label="Core strengths">
+            <span class="pill">Collaboration</span>
+            <span class="pill">Detail-Oriented</span>
+            <span class="pill">Imagination</span>
+          </div>
         </div>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <h2 class="section-title">What I bring</h2>
-        <p class="section-copy">
-          I bring a disciplined, thoughtful approach to high-volume operations. My work is grounded in collaboration, strong standards, and creative problem-solving.
-        </p>
-        <ul class="bullets">
-          <li><strong>Collaboration:</strong> I listen carefully, align people around shared goals, and help teams turn different strengths into effective outcomes.</li>
-          <li><strong>Detail-Oriented:</strong> I focus on the small things that protect quality, consistency, and guest experience.</li>
-          <li><strong>Imagination:</strong> I look for practical new ways to improve systems, solve problems, and raise the bar.</li>
-        </ul>
+        <div class="section-panel">
+          <h2 class="section-title">What I bring</h2>
+          <p class="section-copy">
+            I bring a disciplined, thoughtful approach to high-volume operations. My work is grounded in collaboration, strong standards, and creative problem-solving.
+          </p>
+          <ul class="bullets">
+            <li><strong>Collaboration:</strong> I listen carefully, align people around shared goals, and help teams turn different strengths into effective outcomes.</li>
+            <li><strong>Detail-Oriented:</strong> I focus on the small things that protect quality, consistency, and guest experience.</li>
+            <li><strong>Imagination:</strong> I look for practical new ways to improve systems, solve problems, and raise the bar.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <section id="highlights">
       <div class="container">
-        <h2 class="section-title">Selected highlights</h2>
-        <div class="cards">
-          <article class="card">
-            <h3>Operational systems</h3>
-            <p>Built and implemented workflow and technological systems that increased operational efficiency by 200% and contributed to a 110–125% lift in per-capita gross.</p>
-          </article>
+        <div class="section-panel">
+          <h2 class="section-title">Selected highlights</h2>
+          <div class="cards">
+            <article class="card">
+              <h3>Operational systems</h3>
+              <p>Built and implemented workflow and technological systems that increased operational efficiency by 200% and contributed to a 110–125% lift in per-capita gross.</p>
+            </article>
 
-          <article class="card">
-            <h3>Live event reliability</h3>
-            <p>Managed live technical switching and equipment changeovers under pressure, resolving projector and AV issues in real time to keep events on air.</p>
-          </article>
+            <article class="card">
+              <h3>Live event reliability</h3>
+              <p>Managed live technical switching and equipment changeovers under pressure, resolving projector and AV issues in real time to keep events on air.</p>
+            </article>
 
-          <article class="card">
-            <h3>Team leadership</h3>
-            <p>Trained and led teams with consistency and accountability while producing shift schedules and managing payroll and UKG entries with care.</p>
-          </article>
+            <article class="card">
+              <h3>Team leadership</h3>
+              <p>Trained and led teams with consistency and accountability while producing shift schedules and managing payroll and UKG entries with care.</p>
+            </article>
 
-          <article class="card">
-            <h3>Quality execution</h3>
-            <p>Maintained high standards in fast-moving, guest-facing environments by combining calm judgment, clear communication, and close attention to detail.</p>
-          </article>
+            <article class="card">
+              <h3>Quality execution</h3>
+              <p>Maintained high standards in fast-moving, guest-facing environments by combining calm judgment, clear communication, and close attention to detail.</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
