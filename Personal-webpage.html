@@ -173,7 +173,7 @@
     }
 
     .hero {
-      padding: 4rem 0 3rem;
+      padding: 4rem 0 1.5rem;
       background: var(--hero-bg);
     }
 
@@ -279,6 +279,15 @@
       padding: 3rem 0;
     }
 
+    .hero + section {
+      padding-top: 1.25rem;
+      padding-bottom: 1.5rem;
+    }
+
+    section + #highlights {
+      padding-top: 1.5rem;
+    }
+
     .section-title {
       font-size: clamp(1.4rem, 2.3vw, 1.8rem);
       margin: 0 0 1rem;
@@ -350,7 +359,7 @@
 
     @media (min-width: 960px) {
       .hero {
-        padding: 6rem 0 4rem;
+        padding: 6rem 0 2rem;
       }
       .cards {
         grid-template-columns: repeat(2, minmax(0, 1fr));
