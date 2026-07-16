@@ -181,6 +181,53 @@
       background: var(--hero-bg);
     }
 
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    .hero-photo {
+      justify-self: center;
+      width: 240px;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius);
+      border: 2px dashed var(--teal-500);
+      background: var(--surface-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--ink-500);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .hero-photo svg {
+      width: 3rem;
+      height: 3rem;
+      color: var(--teal-500);
+    }
+
+    .hero-photo span {
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    @media (min-width: 700px) {
+      .hero-grid {
+        grid-template-columns: 1.5fr 1fr;
+        gap: 2rem;
+      }
+      .hero-photo {
+        justify-self: end;
+        width: 300px;
+      }
+    }
+
     .hero h1 {
       font-size: clamp(2rem, 4vw, 3.2rem);
       line-height: 1.1;
@@ -416,14 +463,26 @@
     <section class="hero" id="top">
       <div class="container">
         <div class="section-panel">
-          <h1>Philip Myers</h1>
-          <p class="tagline">A Decade of Operations Leadership &mdash; Now Powering It With AI</p>
-          <p class="lead">I am a management professional with a decade of experience navigating difficult, ever-changing situations &mdash; leading people and using technology to optimize workflows and maximize profits. I am now bringing AI expertise into that work, because great leadership never stops evolving.</p>
+          <div class="hero-grid">
+            <div class="hero-text">
+              <h1>Philip Myers</h1>
+              <p class="tagline">A Decade of Operations Leadership &mdash; Now Powering It With AI</p>
+              <p class="lead">I am a management professional with a decade of experience navigating difficult, ever-changing situations &mdash; leading people and using technology to optimize workflows and maximize profits. I am now bringing AI expertise into that work, because great leadership never stops evolving.</p>
 
-          <div class="pill-group" aria-label="Core strengths">
-            <span class="pill">Collaboration</span>
-            <span class="pill">Detail-Oriented</span>
-            <span class="pill">Imagination</span>
+              <div class="pill-group" aria-label="Core strengths">
+                <span class="pill">Collaboration</span>
+                <span class="pill">Detail-Oriented</span>
+                <span class="pill">Imagination</span>
+              </div>
+            </div>
+
+            <div class="hero-photo" role="img" aria-label="Placeholder for profile photo">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M4.5 19.5C5.8 16 8.6 14.2 12 14.2C15.4 14.2 18.2 16 19.5 19.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+              <span>Profile photo goes here</span>
+            </div>
           </div>
         </div>
       </div>
